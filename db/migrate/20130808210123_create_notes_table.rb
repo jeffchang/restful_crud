@@ -1,6 +1,6 @@
-class CreatePostsTable < ActiveRecord::Migration
+class CreateNotesTable < ActiveRecord::Migration
   def change
-    create_table :posts do |t|
+    create_table :notes do |t|
       t.string :title
       t.text :content
 

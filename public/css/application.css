@@ -7,3 +7,29 @@
 th {
   text-align: left;
 }
+
+.go {
+	float: right;
+	margin-right: 100px;
+}
+
+.button {
+	float: left;
+	padding: 5px;
+}
+
+h2 {
+	background-color: #ccc;
+	padding: 20px;
+	border: 1px solid gray;
+}
+
+#content {
+	padding-left: 1.25em;
+}
+
+#control {
+	float: right;
+	background-color: red;
+	padding: 2px;
+}

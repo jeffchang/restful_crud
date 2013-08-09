@@ -1,33 +1,26 @@
 get '/' do
-  if params[:id] == nil
-    @edit = Note.new({
-    title: nil,
-    content: nil,
-    id: nil
-    })
+  if params[:id].nil?
+    create_edit
   else
     @edit = Note.find(params[:id])
   end
-  @notes = Note.all
-  erb :index
+  find_notes
 end
 
 post '/save' do
-  if params[:id]
-    note = Note.find(params[:id])
-    note.title = params[:title]
-    note.content = params[:content]
-    note.save
-  else
-    params.delete(:id)
-    Note.create(params)
-  end
-  @notes = Note.all
+  save_note
+  back_to_index
 end
 
 post '/delete' do
-  Note.find(params[:id]).destroy
-  @notes = Note.all?
-  erb :index
+  begin
+    Note.find(params[:id]).destroy
+  rescue
+  end
+  back_to_index
 end
 
+post '/deleteall' do
+  Note.destroy_all
+  back_to_index
+end

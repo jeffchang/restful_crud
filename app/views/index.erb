@@ -1,37 +1,48 @@
 <div class="container">
-  <h1>Welcome to the Most Basic Notes App in Existence!</h1>
+  <h2>Welcome to the World's Most Basic Notes App!</h2>
   <p><i>The accuracy of this statement is debatable.</i></p>
 
-<form action="/" method="get">
-  <input type="submit" value="Reset the form!">
-</form>
+  <form action="/" method="get">
+    <input type="submit" value="Reset the form!">
+  </form>
+  <br><br><br>
 
-<form action="/save" method="post">
-  Title: <input type="text" size="100" name="title" value=<%=@edit.title%> placeholder="Enter your post title here">
-  Content: <textarea name="content" value=<%=@edit.content%> placeholder="Enter your note here"></textarea>
-  <br>
-  <input type="hidden" name="id" value=<%=@edit.id%>>
-  <input type="submit" value="Post it!">
-</form>
+  <form action="/save" method="post">
+    Title: <input type="text" size="60" name="title" value="<%=@edit.title%>" placeholder="Enter your post title here">
+    <br><br><br>
+    Content: <textarea rows="6" cols="40" name="content" placeholder="Enter your note here"><%=@edit.content%></textarea>
+    <br><br>
+    <input type="hidden" name="id" value="<%=@edit.id%>">
+    <input class="go" type="submit" value="Post it!">
+  </form>
+  <br><br><br>
 
 </div>
 
 <div class="container">
-  <h2>Current Notes:</h2>
+  <h2><%= @notes.length > 0 ? "Current Notes:" : "No Notes Found!"%></h2>
   <br>
+  
+  <% if @notes.length > 0 %>
+  <form id="control" action="/deleteall" method="post">
+    <input type="submit" value="Delete All Posts!!">
+  </form>
+  <% end %>
+  
   <% counter = 0 %>
   <% @notes.each do |note| %>
-    <% counter += 1 %>
-    <h3><%= "#{counter}. #{note.title}" %></h3>
-    <p><%= note.content %></p>
-    <form action="/" method="get">
-      <input type="hidden" value=<%=note.id%>
-      <input type="submit" value="Update">
-    </form>
-    <form action="/delete" method="post">
-      <input type="hidden" value=<%=note.id%>
-      <input type="submit" value="Delete">
-    </form>
+  <% counter += 1 %>
+  <h3><%= "#{counter}. #{note.title}" %></h3>
+  <p id="content"><%= note.content %></p>
+  <form class="button" action="/" method="get">
+    <input type="hidden" name="id" value="<%=note.id%>">
+    <input type="submit" value="Update">
+  </form>
+  <form class="button" action="/delete" method="post">
+    <input type="hidden" name="id" value="<%=note.id%>">
+    <input type="submit" value="Delete">
+  </form>
+  <br><br><br>
+  <% end %>
 
 </div>
-
